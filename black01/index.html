@@ -694,6 +694,11 @@
 
       <form class="lead__form" id="lead-form" novalidate>
         <div class="field">
+          <label for="lead-nome">Nome</label>
+          <input id="lead-nome" name="nome" type="text" autocomplete="name" autocapitalize="words" placeholder="Seu nome" required>
+          <p class="field__err">Digite seu nome.</p>
+        </div>
+        <div class="field">
           <label for="lead-email">E-mail</label>
           <input id="lead-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="seu@email.com" required>
           <p class="field__err">Digite um e-mail válido.</p>
@@ -832,6 +837,7 @@
     (function () {
       const dialog = document.getElementById('lead');
       const form = document.getElementById('lead-form');
+      const nome = form.elements.nome;
       const email = form.elements.email;
       const whats = form.elements.whatsapp;
       const submit = form.querySelector('[type="submit"]');
@@ -845,7 +851,7 @@
       document.querySelectorAll('[data-cta]').forEach((a) => a.addEventListener('click', (e) => {
         e.preventDefault();
         dialog.showModal();
-        email.focus();
+        nome.focus();
       }));
       dialog.querySelector('[data-close]').addEventListener('click', () => dialog.close());
       dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
@@ -859,23 +865,28 @@
         whats.value = v;
       });
 
+      const okNome = () => nome.value.trim().length >= 2;
       const okEmail = () => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim());
       const okWhats = () => /^[1-9]{2}9?\d{8}$/.test(whats.value.replace(/\D/g, ''));
       const mark = (input, ok) => input.closest('.field').classList.toggle('is-bad', !ok);
+      nome.addEventListener('blur', () => nome.value && mark(nome, okNome()));
       email.addEventListener('blur', () => email.value && mark(email, okEmail()));
       whats.addEventListener('blur', () => whats.value && mark(whats, okWhats()));
+      nome.addEventListener('input', () => okNome() && mark(nome, true));
       email.addEventListener('input', () => okEmail() && mark(email, true));
       whats.addEventListener('input', () => okWhats() && mark(whats, true));
 
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const e1 = okEmail(), e2 = okWhats();
-        mark(email, e1); mark(whats, e2);
+        const e0 = okNome(), e1 = okEmail(), e2 = okWhats();
+        mark(nome, e0); mark(email, e1); mark(whats, e2);
+        if (!e0) return nome.focus();
         if (!e1) return email.focus();
         if (!e2) return whats.focus();
 
         const params = new URLSearchParams(location.search);
         const dados = {
+          nome: nome.value.trim().replace(/\s+/g, ' '),
           email: email.value.trim().toLowerCase(),
           whatsapp: '55' + whats.value.replace(/\D/g, ''),
           pagina: 'black01',
