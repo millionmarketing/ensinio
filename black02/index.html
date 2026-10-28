@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Black Ensinio · Live Exclusiva</title>
+  <meta name="description" content="Black Ensinio Nova Era — live exclusiva, Edição Black Friday: toda a estrutura de IA pronta para você multiplicar seu lucro em 5X. 11/11 às 20h.">
+  <link rel="icon" href="../assets/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Domine:wght@500;600;700&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* Design system Ensinio (ensinio.com): fundo preto, azul #3B37FF, Domine nos títulos, Geist no corpo, botões pill */
+    :root {
+      --bg: #000000;
+      --surface: #0a0a0c;
+      --card: #111114;
+      --border: #262626;
+      --border-soft: rgba(255, 255, 255, .08);
+      --blue: #3b37ff;
+      --blue-hi: #6b68ff;
+      --blue-soft: #a5a3ff;
+      --blue-deep: #1d1a9e;
+      --white: #ffffff;
+      --text: #ededed;
+      --muted: #a1a1aa;
+      --dim: #71717a;
+      --glow: 0 0 24px rgba(59, 55, 255, .55), 0 0 80px rgba(59, 55, 255, .3);
+      --radius: 10px;
+      --font-head: "Domine", Georgia, serif;
+      --font-body: "Geist", ui-sans-serif, system-ui, sans-serif;
+      --font-mono: "Geist Mono", ui-monospace, monospace;
+      --wrap: min(1160px, 100% - 32px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    html, body { background: var(--bg); color: var(--white); }
+    body { font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5; }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; }
+
+    .wrap { width: var(--wrap); margin: 0 auto; }
+
+    /* ───────── Elementos compartilhados ───────── */
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 7px 14px 7px 10px;
+      border: 1px solid var(--border); border-radius: 999px;
+      background: rgba(17, 17, 20, .7);
+      backdrop-filter: blur(8px);
+      font: 500 12px/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase;
+      color: var(--text);
+    }
+    .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 10px var(--blue), 0 0 2px #fff inset; animation: pulse 2.4s ease-in-out infinite; }
+    @keyframes pulse { 50% { box-shadow: 0 0 18px 2px var(--blue); opacity: .7; } }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+      padding: 18px 30px;
+      border-radius: 999px;
+      font: 600 16px/1 var(--font-body); letter-spacing: .04em; text-transform: uppercase;
+      transition: transform .2s ease, box-shadow .25s ease, background .25s ease;
+    }
+    .btn--primary {
+      position: relative;
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.14) inset, 0 10px 40px rgba(59,55,255,.45);
+    }
+    .btn--primary::before { /* brilho que percorre o botão */
+      content: ""; position: absolute; inset: 0; border-radius: inherit; overflow: hidden;
+      background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.28) 48%, transparent 66%) -200% 0 / 250% 100% no-repeat;
+      animation: sheen 4.5s ease-in-out infinite;
+    }
+    @keyframes sheen { 0%, 55% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    .btn--primary:hover { transform: translateY(-2px); background: #4a46ff; box-shadow: 0 0 0 1px rgba(255,255,255,.22) inset, 0 16px 56px rgba(59,55,255,.7); }
+    .btn--ghost { background: #1a1a1a; border: 1px solid var(--border); color: #fff; }
+    .btn--ghost:hover { border-color: #3a3a3a; background: #202020; }
+    .btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+    .btn svg.wa { width: 22px; height: 22px; flex: none; }
+    .btn svg.arrow { width: 16px; height: 16px; flex: none; transition: transform .2s ease; }
+    .btn:hover svg.arrow { transform: translateX(4px); }
+
+    .section-title {
+      font: 600 clamp(30px, 4vw, 48px)/1.12 var(--font-head);
+      letter-spacing: -.015em;
+      text-wrap: balance;
+    }
+    .section-title em { font-style: normal; color: var(--blue-soft); }
+    .section-lead { margin-top: 16px; max-width: 560px; color: var(--muted); font-size: 18px; text-wrap: pretty; }
+
+    /* ───────── HERO ───────── */
+    .hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; isolation: isolate; overflow: hidden; }
+
+    .hero__grid {
+      position: absolute; inset: 0; z-index: -3;
+      background:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px) 0 0 / 64px 64px,
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px) 0 0 / 64px 64px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+    }
+    .hero__aurora {
+      position: absolute; z-index: -2; pointer-events: none;
+      left: 50%; top: -18%; width: 1300px; height: 900px; transform: translateX(-50%);
+      background:
+        radial-gradient(ellipse 30% 40% at 50% 45%, rgba(59,55,255,.55), transparent 70%),
+        radial-gradient(ellipse 50% 30% at 30% 55%, rgba(59,55,255,.22), transparent 70%),
+        radial-gradient(ellipse 45% 30% at 72% 50%, rgba(107,104,255,.2), transparent 70%);
+      filter: blur(20px);
+      animation: breathe 9s ease-in-out infinite;
+    }
+    @keyframes breathe { 50% { opacity: .75; transform: translateX(-50%) scale(1.06); } }
+    .hero__beam { /* feixe vertical de luz */
+      position: absolute; z-index: -2; left: 50%; top: 0; width: 2px; height: clamp(90px, 13vh, 140px);
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, transparent, rgba(165,163,255,.9) 60%, rgba(59,55,255,0));
+      box-shadow: 0 0 30px 6px rgba(59,55,255,.35);
+    }
+    .hero__fade { position: absolute; inset: auto 0 0; height: 30%; z-index: -1; background: linear-gradient(transparent, var(--bg)); }
+
+    .nav {
+      position: relative; z-index: 2;
+      width: var(--wrap); margin: 0 auto; padding: 26px 0;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .nav__logo img { height: 22px; width: auto; }
+
+    .hero__body {
+      flex: 1; position: relative; z-index: 1;
+      width: min(960px, 100% - 32px); margin: 0 auto;
+      padding: clamp(24px, 6vh, 72px) 0 72px;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+
+    .lockup { margin-top: 30px; display: flex; align-items: center; gap: clamp(14px, 2vw, 22px); }
+    .lockup__word { font: 500 clamp(13px, 1.4vw, 15px)/1 var(--font-mono); letter-spacing: .5em; margin-right: -.5em; color: var(--blue-soft); text-transform: uppercase; }
+    .lockup__sep { width: 40px; height: 1px; background: linear-gradient(90deg, transparent, var(--blue-hi), transparent); }
+    .lockup__logo { height: clamp(26px, 3.2vw, 36px); width: auto; filter: drop-shadow(0 0 22px rgba(59,55,255,.5)); }
+
+    .headline {
+      margin-top: 34px;
+      font: 600 clamp(34px, 5.6vw, 72px)/1.06 var(--font-head);
+      letter-spacing: -.025em;
+      text-wrap: balance;
+    }
+    .headline .grad {
+      background: linear-gradient(100deg, #fff 0%, var(--blue-soft) 45%, var(--blue-hi) 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .headline .x5 {
+      display: inline-block; padding: 0 .18em; border-radius: .14em;
+      background: var(--blue); color: #fff;
+      box-shadow: var(--glow);
+      transform: rotate(-2deg);
+    }
+
+    .sub {
+      margin-top: 26px; max-width: 640px;
+      font: 400 clamp(17px, 1.7vw, 20px)/1.55 var(--font-body);
+      color: var(--muted); text-wrap: balance;
+    }
+    .sub strong { color: var(--text); font-weight: 500; }
+
+    /* Data + contagem regressiva */
+    .launch {
+      margin-top: 40px;
+      display: flex; align-items: stretch; gap: 1px;
+      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+      background: var(--border);
+      box-shadow: 0 30px 80px -30px rgba(59,55,255,.5);
+    }
+    .launch > div { background: rgba(10,10,12,.92); backdrop-filter: blur(10px); padding: 16px 22px; }
+    .launch__date { display: flex; align-items: center; gap: 14px; text-align: left; }
+    .launch__date svg { width: 28px; height: 28px; color: var(--blue-hi); flex: none; }
+    .launch__label { font: 500 11px/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+    .launch__value { margin-top: 6px; font: 700 22px/1 var(--font-head); }
+    .launch__count { display: flex; gap: 18px; align-items: center; }
+    .unit { min-width: 46px; text-align: center; }
+    .unit b { display: block; font: 500 26px/1 var(--font-mono); font-variant-numeric: tabular-nums; }
+    .unit span { display: block; margin-top: 6px; font: 500 10px/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+    .launch__count i { width: 1px; height: 26px; background: var(--border); }
+
+    .hero__cta { margin-top: 28px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .hero__cta .btn { padding: 20px 36px; font-size: 17px; }
+    .micro { max-width: 440px; font-size: 14px; color: var(--dim); text-wrap: balance; }
+    .micro svg { display: inline; width: 13px; height: 13px; vertical-align: -2px; margin-right: 4px; color: var(--blue-hi); }
+
+    /* Faixa de elementos de apoio */
+    .marquee { position: relative; height: clamp(150px, 15vw, 210px); overflow: hidden; }
+    .ribbon { position: absolute; left: -6%; right: -6%; top: 50%; overflow: hidden; }
+    .ribbon--back {
+      transform: translateY(-50%) rotate(-3.5deg);
+      background: linear-gradient(90deg, var(--blue-deep), var(--blue) 30%, var(--blue) 70%, var(--blue-deep));
+      box-shadow: 0 0 0 1px rgba(255,255,255,.14) inset, 0 20px 60px -10px rgba(59,55,255,.6);
+    }
+    .ribbon--front {
+      transform: translateY(-50%) rotate(3deg);
+      background: rgba(10,10,14,.55);
+      backdrop-filter: blur(12px) saturate(140%); -webkit-backdrop-filter: blur(12px) saturate(140%);
+      border-block: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 0 0 1px var(--border) inset, 0 20px 50px -20px rgba(0,0,0,.9);
+    }
+    .marquee__track { display: flex; width: max-content; animation: slide 36s linear infinite; }
+    .ribbon--front .marquee__track { animation-direction: reverse; animation-duration: 42s; }
+    .marquee__track span {
+      display: inline-flex; align-items: center; gap: 28px; padding: 18px 14px;
+      font: 600 clamp(14px, 1.4vw, 17px)/1 var(--font-body); letter-spacing: .22em; text-transform: uppercase; white-space: nowrap; color: var(--text);
+    }
+    .ribbon--back .marquee__track span { color: #fff; }
+    .marquee__track span::after { content: ""; width: 7px; height: 7px; border-radius: 2px; transform: rotate(45deg); background: var(--blue); box-shadow: 0 0 10px var(--blue); }
+    .ribbon--back .marquee__track span::after { background: #fff; box-shadow: 0 0 10px rgba(255,255,255,.8); }
+    @keyframes slide { to { transform: translateX(-50%); } }
+
+    /* ───────── PILARES ───────── */
+    .section { padding: clamp(80px, 12vw, 140px) 0; position: relative; }
+    .section__head { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; margin-bottom: 56px; }
+
+    /* ───────── HUB DE CONEXÕES ───────── */
+    .hub { overflow: hidden; }
+    .hub .section__head { align-items: center; text-align: center; }
+    .hub .section-lead { margin-inline: auto; }
+    .hub__stage {
+      --arc: 1;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      grid-template-rows: auto auto;
+      column-gap: clamp(56px, 11vw, 170px);
+      align-items: center;
+    }
+    .hub__stage::before { /* brilho atrás do núcleo */
+      content: ""; position: absolute; left: 50%; top: 38%; width: 720px; height: 620px; transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(59,55,255,.28), transparent 62%); pointer-events: none; z-index: -1;
+    }
+    .hub__wires { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+    .wire { fill: none; stroke: rgba(107,104,255,.38); stroke-width: 1.5;
+      stroke-dasharray: var(--len); stroke-dashoffset: var(--len);
+      transition: stroke-dashoffset 1.3s cubic-bezier(.6,0,.2,1) var(--d, 0s), stroke .3s ease; }
+    .wire-flow { fill: none; stroke: var(--blue-soft); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 2 22;
+      opacity: 0; transition: opacity .6s ease 1.4s; animation: flow 1.6s linear infinite; }
+    @keyframes flow { to { stroke-dashoffset: -24; } }
+    .spark-dot { fill: #fff; opacity: 0; transition: opacity .6s ease 1.5s; filter: drop-shadow(0 0 4px var(--blue-hi)) drop-shadow(0 0 10px var(--blue)); }
+    .hub__stage.in .wire { stroke-dashoffset: 0; }
+    .hub__stage.in .wire-flow, .hub__stage.in .spark-dot { opacity: 1; }
+    .wire.is-hot { stroke: var(--blue-soft); }
+    .wire--out { stroke: url(#outGrad); stroke-width: 3; filter: drop-shadow(0 0 6px rgba(59,55,255,.9)); }
+    .wire-flow--out { stroke: #fff; stroke-width: 3; stroke-dasharray: 10 26; animation: flowOut 1.1s linear infinite; }
+    @keyframes flowOut { to { stroke-dashoffset: -36; } }
+
+    .hub__col { position: relative; display: flex; flex-direction: column; gap: 16px; grid-row: 1; }
+    .hub__col--l { grid-column: 1; align-items: flex-end; }
+    .hub__col--r { grid-column: 3; align-items: flex-start; }
+    .hub__col .node:nth-child(2), .hub__col .node:nth-child(4) { --o: 34; }
+    .hub__col .node:nth-child(3) { --o: 52; }
+    .hub__col--l .node { transform: translateX(calc(var(--o, 0) * -1px * var(--arc))); }
+    .hub__col--r .node { transform: translateX(calc(var(--o, 0) * 1px * var(--arc))); }
+
+    .node {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 9px 18px 9px 9px;
+      border: 1px solid var(--border); border-radius: 999px;
+      background: linear-gradient(180deg, #131317, #0b0b0e);
+      box-shadow: 0 10px 30px -12px rgba(0,0,0,.8);
+      font: 500 15px/1 var(--font-body); color: var(--text); white-space: nowrap;
+      transition: border-color .3s ease, box-shadow .3s ease;
+    }
+    .hub__col--l .node { flex-direction: row-reverse; padding: 9px 9px 9px 18px; }
+    .node:hover { border-color: rgba(107,104,255,.7); box-shadow: 0 0 0 4px rgba(59,55,255,.12), 0 10px 30px -10px rgba(59,55,255,.6); }
+    .node__ic { width: 36px; height: 36px; flex: none; border-radius: 50%; display: grid; place-items: center;
+      background: rgba(59,55,255,.14); border: 1px solid rgba(59,55,255,.4); color: var(--blue-soft); }
+    .node__ic svg { width: 18px; height: 18px; }
+
+    .hub__core { grid-column: 2; grid-row: 1; position: relative; display: grid; place-items: center;
+      width: clamp(104px, 15vw, 190px); aspect-ratio: 1; }
+    .core {
+      position: relative; z-index: 1; width: 100%; height: 100%; border-radius: 50%;
+      display: grid; place-items: center;
+      background: radial-gradient(circle at 50% 30%, #17153f, #050510 70%);
+      border: 1px solid rgba(165,163,255,.55);
+      box-shadow: 0 0 0 8px rgba(59,55,255,.08), 0 0 60px rgba(59,55,255,.65), inset 0 0 30px rgba(59,55,255,.45);
+      animation: corePulse 3.2s ease-in-out infinite;
+    }
+    .core img { width: 30%; height: auto; transform: translateX(4%); filter: drop-shadow(0 0 6px rgba(255,255,255,.6)) drop-shadow(0 0 18px rgba(165,163,255,.8)); }
+    @keyframes corePulse { 50% { box-shadow: 0 0 0 12px rgba(59,55,255,.12), 0 0 90px rgba(59,55,255,.85), inset 0 0 40px rgba(59,55,255,.6); } }
+    .core__ring { position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(107,104,255,.6); animation: ripple 3.6s cubic-bezier(.2,.6,.3,1) infinite; }
+    .core__ring:nth-child(2) { animation-delay: 1.2s; }
+    .core__ring:nth-child(3) { animation-delay: 2.4s; }
+    @keyframes ripple { from { transform: scale(1); opacity: .8; } to { transform: scale(1.9); opacity: 0; } }
+    .core__orbit { position: absolute; inset: -16%; border-radius: 50%; border: 1px dashed rgba(165,163,255,.25); animation: spin 30s linear infinite; }
+    .core__orbit::after { content: ""; position: absolute; top: -4px; left: 50%; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: var(--blue-soft); box-shadow: 0 0 12px var(--blue); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .hub__out { grid-column: 1 / -1; grid-row: 2; justify-self: center; margin-top: clamp(56px, 7vw, 84px); width: min(380px, 100%); }
+    .sales { position: relative; padding-top: 22px; }
+    .sales__port { /* encaixe onde a linha chega */
+      position: absolute; left: 50%; top: 0; width: 16px; height: 16px; transform: translate(-50%, -50%);
+      border-radius: 50%; background: #fff; border: 4px solid var(--blue);
+      box-shadow: 0 0 0 4px rgba(59,55,255,.25), 0 0 18px var(--blue-hi);
+      animation: portPulse 1.1s ease-in-out infinite;
+    }
+    @keyframes portPulse { 50% { box-shadow: 0 0 0 8px rgba(59,55,255,.12), 0 0 28px var(--blue-hi); } }
+    .sales__feed { list-style: none; display: flex; flex-direction: column; gap: 10px; height: 236px; overflow: hidden; padding: 4px 6px 0;
+      mask-image: linear-gradient(#000 55%, transparent); -webkit-mask-image: linear-gradient(#000 55%, transparent); }
+    .sales__feed li {
+      display: flex; align-items: center; gap: 12px; padding: 12px 16px 12px 12px; border-radius: 14px;
+      background: rgba(17,17,24,.92); border: 1px solid var(--border);
+      box-shadow: 0 12px 30px -12px rgba(0,0,0,.9);
+      font-size: 14.5px; font-weight: 500; color: var(--text);
+      animation: feedIn .55s cubic-bezier(.2,.7,.2,1);
+    }
+    .sales__feed li:first-child { border-color: rgba(107,104,255,.6); box-shadow: 0 0 0 4px rgba(59,55,255,.1), 0 14px 40px -10px rgba(59,55,255,.6); }
+    .sales__feed li::before { content: "✓"; width: 30px; height: 30px; flex: none; border-radius: 50%; display: grid; place-items: center;
+      background: rgba(34,197,94,.14); border: 1px solid rgba(34,197,94,.4); color: #4ade80; font-size: 14px; font-weight: 700; }
+    .sales__feed li span { margin-left: auto; font: 500 11.5px/1 var(--font-mono); color: var(--blue-soft); }
+    @keyframes feedIn { from { opacity: 0; transform: translateY(-14px) scale(.96); } }
+
+    /* ───────── JORNADA ───────── */
+    .journey { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; position: relative; counter-reset: step; }
+    .journey::before { /* linha que conecta as etapas */
+      content: ""; position: absolute; left: 16.66%; right: 16.66%; top: 31px; height: 1px;
+      background: linear-gradient(90deg, var(--blue-deep), var(--blue-hi), var(--blue-deep));
+      box-shadow: 0 0 12px rgba(59,55,255,.6);
+    }
+    .step { position: relative; padding: 0 22px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .step__n {
+      counter-increment: step;
+      width: 62px; height: 62px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: #000; border: 1px solid rgba(107,104,255,.6);
+      box-shadow: 0 0 0 6px #000, var(--glow);
+      font: 500 15px/1 var(--font-mono); color: var(--blue-soft);
+    }
+    .step__n::before { content: "0" counter(step); }
+    .step h3 { margin-top: 26px; font: 600 24px/1.2 var(--font-head); }
+    .step p { margin-top: 10px; color: var(--muted); max-width: 300px; text-wrap: pretty; }
+
+    /* ───────── CTA FINAL ───────── */
+    .final { padding: 0 0 clamp(80px, 10vw, 120px); }
+    .final__card {
+      position: relative; overflow: hidden; isolation: isolate;
+      padding: clamp(48px, 8vw, 96px) clamp(24px, 6vw, 80px);
+      border: 1px solid rgba(107,104,255,.4); border-radius: 28px;
+      background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(59,55,255,.45), transparent 70%), #07070a;
+      text-align: center; display: flex; flex-direction: column; align-items: center;
+    }
+    .final__card::before {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px) 0 0 / 48px 48px,
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px) 0 0 / 48px 48px;
+      mask-image: radial-gradient(ellipse at 50% 0%, #000 10%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000 10%, transparent 70%);
+    }
+    .final .section-title { margin-top: 28px; max-width: 760px; }
+    /* Selo "condição nunca feita antes" */
+    .unseen {
+      position: relative; isolation: isolate;
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 1.5px; border-radius: 999px;
+    }
+    .unseen::before { /* borda */
+      content: ""; position: absolute; inset: 0; z-index: -2; border-radius: inherit; overflow: hidden;
+      background: linear-gradient(90deg, var(--blue), #fff 50%, var(--blue));
+    }
+    .unseen::after { /* halo */
+      content: ""; position: absolute; inset: -18px -30px; z-index: -3; border-radius: 999px;
+      background: radial-gradient(ellipse, rgba(59,55,255,.45), transparent 70%); filter: blur(8px);
+    }
+    .unseen__inner {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 8px 20px 8px 8px; border-radius: 999px;
+      background: linear-gradient(180deg, #14134a, #07071a);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
+    }
+    .unseen__tag {
+      padding: 7px 11px; border-radius: 999px;
+      background: #fff; color: var(--blue);
+      font: 700 11px/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase;
+      box-shadow: 0 0 18px rgba(255,255,255,.55);
+    }
+    .unseen__text {
+      display: inline-flex; align-items: center; gap: 8px;
+      font: 600 clamp(13px, 1.5vw, 16px)/1.35 var(--font-body); letter-spacing: .14em; text-transform: uppercase;
+      color: #fff;
+    }
+    .unseen__text svg { width: 16px; height: 16px; color: #fff; flex: none; filter: drop-shadow(0 0 6px var(--blue-hi)); }
+
+    .final .section-lead { margin-inline: auto; }
+    .final .section-lead strong { color: var(--white); font-weight: 600; }
+    .final__date { margin-top: 30px; font: 500 13px/1 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--blue-soft); }
+    .final .btn { margin-top: 18px; padding: 20px 36px; font-size: 17px; }
+    .final .micro { margin-top: 14px; }
+
+    footer { border-top: 1px solid var(--border); padding: 28px 0; }
+    footer .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    footer img { height: 18px; width: auto; opacity: .85; }
+    footer small { color: var(--dim); font-size: 13px; }
+
+    /* ───────── INSCRIÇÃO (formulário na página) ───────── */
+    .signup { position: relative; padding: clamp(40px, 6vw, 80px) 0 clamp(80px, 10vw, 120px); scroll-margin-top: 0; }
+    .signup::before { content: ""; position: absolute; left: 50%; top: 45%; width: 1100px; height: 700px; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgba(59,55,255,.22), transparent 70%); pointer-events: none; z-index: -1; }
+    .signup .section__head { align-items: center; text-align: center; margin-bottom: clamp(40px, 5vw, 64px); }
+    .signup .section-lead { margin-inline: auto; }
+    .signup__grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(32px, 5vw, 64px); max-width: 1040px; margin: 0 auto; }
+
+    /* Ingresso */
+    .ticket {
+      position: relative; padding: 34px 32px 30px; border-radius: 22px; rotate: -3deg;
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(110% 80% at 0% 0%, rgba(107,104,255,.55), transparent 55%),
+        radial-gradient(90% 70% at 100% 100%, rgba(29,26,158,.8), transparent 60%),
+        linear-gradient(160deg, #15134a, #07071a 70%);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.05) inset, 0 40px 100px -20px rgba(59,55,255,.55), 0 30px 60px -30px #000;
+      overflow: hidden;
+      transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1), rotate .5s cubic-bezier(.2,.7,.2,1);
+    }
+    .ticket:hover { rotate: -1.5deg; }
+    .ticket::before { /* grade sutil */
+      content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+      background: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px) 0 0 / 32px 32px, linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px) 0 0 / 32px 32px;
+      mask-image: linear-gradient(180deg, #000, transparent 70%);
+    }
+    .ticket__notch { position: absolute; top: 61%; width: 30px; height: 30px; border-radius: 50%; background: var(--bg); border: 1px solid rgba(255,255,255,.12); transform: translateY(-50%); }
+    .ticket__notch--l { left: -16px; } .ticket__notch--r { right: -16px; }
+    .ticket__top { position: relative; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+    .ticket__kicker { font: 500 11px/1.4 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--blue-soft); }
+    .ticket__sym { width: 34px; height: auto; filter: drop-shadow(0 0 10px rgba(165,163,255,.7)); }
+    .ticket__brand { position: relative; margin-top: 22px; }
+    .ticket__brand span { display: block; font: 500 13px/1 var(--font-mono); letter-spacing: .5em; text-transform: uppercase; color: var(--blue-soft); }
+    .ticket__brand img { margin-top: 14px; width: min(78%, 300px); height: auto; }
+    .ticket__brand b { display: block; margin-top: 14px; font: 600 clamp(26px, 3vw, 34px)/1 var(--font-head); letter-spacing: -.01em; background: linear-gradient(90deg, #fff, var(--blue-soft)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .ticket__cut { position: relative; margin: 26px -32px 22px; border-top: 2px dashed rgba(255,255,255,.18); }
+    .ticket__date { position: relative; font: 700 clamp(26px, 3vw, 34px)/1 var(--font-body); letter-spacing: -.01em; }
+    .ticket__where { position: relative; margin-top: 10px; font: 500 11px/1 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+    .ticket__bar { position: relative; margin-top: 22px; height: 46px; background: repeating-linear-gradient(90deg, #fff 0 2px, transparent 2px 4px, #fff 4px 5px, transparent 5px 9px, #fff 9px 12px, transparent 12px 14px, #fff 14px 15px, transparent 15px 19px); opacity: .85; mask-image: linear-gradient(90deg, #000 85%, transparent); }
+    .ticket__code { position: relative; margin-top: 10px; display: flex; justify-content: space-between; font: 500 10.5px/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+
+    /* Cartão do formulário */
+    .lead__card {
+      position: relative; padding: 36px 32px 28px; border-radius: 22px; overflow: hidden;
+      border: 1px solid var(--border);
+      background: radial-gradient(120% 70% at 50% -10%, rgba(59,55,255,.26), transparent 60%), var(--surface);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.04) inset, 0 30px 120px rgba(59,55,255,.25);
+    }
+    .lead__card::before { content: ""; position: absolute; left: 15%; right: 15%; top: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--blue-hi), transparent); }
+    .lead__title { font: 600 clamp(22px, 2.4vw, 27px)/1.2 var(--font-head); letter-spacing: -.01em; }
+    .lead__chips { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .lead__chips span { display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; border: 1px solid var(--border); border-radius: 999px; background: #121215; font: 500 12px/1 var(--font-mono); letter-spacing: .06em; color: var(--text); }
+    .lead__chips svg { width: 13px; height: 13px; color: var(--blue-hi); }
+    .lead__form { margin-top: 22px; display: grid; gap: 14px; text-align: left; }
+    .field label { display: block; margin-bottom: 7px; font: 500 11px/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    .field input {
+      width: 100%; padding: 15px 16px; border-radius: var(--radius);
+      border: 1px solid var(--border); background: #0e0e11; color: #fff;
+      font: 400 16px/1.2 var(--font-body);
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .field input::placeholder { color: #52525b; }
+    .field input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,55,255,.3); }
+    .field.is-bad input { border-color: #f0475a; }
+    .field__err { display: none; margin-top: 6px; font-size: 13px; color: #ff7a88; }
+    .field.is-bad .field__err { display: block; }
+    .lead__form .btn { width: 100%; margin-top: 6px; padding: 18px 20px; font-size: 15px; cursor: pointer; border: 0; }
+    .lead__form .btn[disabled] { opacity: .7; cursor: progress; }
+    .lead__legal { margin-top: 16px; font-size: 11.5px; line-height: 1.55; color: var(--dim); text-wrap: pretty; }
+    .lead__legal svg { display: inline; width: 11px; height: 11px; vertical-align: -1px; margin-right: 4px; color: var(--blue-hi); }
+
+    @media (max-width: 860px) {
+      .signup__grid { grid-template-columns: 1fr; max-width: 480px; }
+      .ticket { rotate: -2deg; margin-inline: 6px; }
+    }
+    @media (max-width: 760px) {
+      .ticket { padding: 28px 22px 24px; }
+      .ticket__cut { margin-inline: -22px; }
+      .lead__card { padding: 30px 20px 22px; }
+    }
+
+    /* Revelação ao rolar */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (max-width: 760px) {
+      .nav { display: none; }
+      .hub__stage { --arc: .25; column-gap: 26px; }
+      .hub__col { gap: 12px; }
+      .node, .hub__col--l .node { flex-direction: column; gap: 6px; width: 74px; padding: 8px 4px 9px; border-radius: 14px; font-size: 10.5px; }
+      .node__ic { width: 34px; height: 34px; }
+      .node__ic svg { width: 16px; height: 16px; }
+      .core__orbit { inset: -12%; }
+      .lockup { flex-direction: column; gap: 12px; }
+      .lockup__sep { display: none; }
+      .lockup__word { letter-spacing: .36em; margin-right: -.36em; }
+      .hero__beam { height: 60px; }
+      .eyebrow { font-size: 10.5px; letter-spacing: .08em; }
+      .unseen__inner { padding-right: 14px; gap: 8px; }
+      .unseen__text { letter-spacing: .06em; font-size: 12px; }
+      .unseen__tag { padding: 6px 8px; font-size: 10px; }
+      .launch { flex-direction: column; width: 100%; }
+      .launch__date { justify-content: center; }
+      .launch__count { justify-content: center; gap: 12px; }
+      .hero__cta, .hero__cta .btn, .final .btn { width: 100%; }
+      .hero__cta .btn, .final .btn { padding: 18px 20px; font-size: 15px; }
+      .journey { grid-template-columns: 1fr; gap: 44px; }
+      .journey::before { left: 31px; right: auto; top: 31px; bottom: 31px; width: 1px; height: auto; background: linear-gradient(180deg, var(--blue-deep), var(--blue-hi), var(--blue-deep)); }
+      .step { flex-direction: row; align-items: flex-start; text-align: left; gap: 20px; padding: 0; }
+      .step__n { flex: none; }
+      .step h3 { margin-top: 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═════════ HERO ═════════ -->
+  <section class="hero" id="topo">
+    <div class="hero__grid" aria-hidden="true"></div>
+    <div class="hero__aurora" aria-hidden="true"></div>
+    <div class="hero__beam" aria-hidden="true"></div>
+    <div class="hero__fade" aria-hidden="true"></div>
+
+    <header class="nav">
+      <a class="nav__logo" href="https://ensinio.com/" aria-label="Ensinio">
+        <img src="../assets/logo_ensinio.png" alt="Ensinio" width="350" height="66">
+      </a>
+    </header>
+
+    <div class="hero__body">
+      <span class="eyebrow"><span class="dot"></span>Live exclusiva · Edição Black Friday</span>
+
+      <h1 class="lockup" aria-label="Black Ensinio Nova Era">
+        <span class="lockup__word">Black</span>
+        <span class="lockup__sep"></span>
+        <img class="lockup__logo" src="../assets/logo_ensinio.png" alt="" width="350" height="66">
+        <span class="lockup__sep"></span>
+        <span class="lockup__word">Nova Era</span>
+      </h1>
+
+      <h2 class="headline">
+        Nós vamos entregar toda a <span class="grad">estrutura de IA pronta</span> para você multiplicar seu lucro em <span class="x5">5X</span>
+      </h2>
+
+      <p class="sub">Da <strong>captação de leads</strong> ao <strong>atendimento</strong> e <strong>fechamento de vendas</strong>. Tudo conectado e automatizado para fazer seu negócio crescer sem você ficar refém da operação.</p>
+
+      <div class="launch" role="group" aria-label="Data de lançamento">
+        <div class="launch__date">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>
+          </svg>
+          <div>
+            <div class="launch__label">Live exclusiva · ao vivo</div>
+            <div class="launch__value"><time datetime="2026-11-11T20:00:00-03:00">11/11 às 20h</time></div>
+          </div>
+        </div>
+        <div class="launch__count" data-countdown="2026-11-11T20:00:00-03:00" aria-live="off">
+          <div class="unit"><b data-u="d">00</b><span>Dias</span></div><i></i>
+          <div class="unit"><b data-u="h">00</b><span>Horas</span></div><i></i>
+          <div class="unit"><b data-u="m">00</b><span>Min</span></div><i></i>
+          <div class="unit"><b data-u="s">00</b><span>Seg</span></div>
+        </div>
+      </div>
+
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="#inscricao" data-cta="quero-ser-avisado">
+          <svg class="wa" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M16 3.5A12.5 12.5 0 0 0 5.2 22.3L3.6 28.4l6.3-1.6A12.5 12.5 0 1 0 16 3.5Z" stroke-linejoin="round"/>
+            <path d="M11.6 9.8c.3-.3.8-.3 1 .1l1.3 2.6c.2.4.1.8-.2 1.1l-.8.8a8.3 8.3 0 0 0 4.7 4.7l.8-.8c.3-.3.7-.4 1.1-.2l2.6 1.3c.4.2.4.7.1 1-1.1 1.4-2.7 1.9-4.4 1.2a14 14 0 0 1-7.3-7.3c-.7-1.7-.2-3.3 1.1-4.5Z" fill="currentColor" stroke="none"/>
+          </svg>
+          Quero participar da Black ENSINIO
+          <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+        <p class="micro">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1 2.5 3.2v4.3c0 3.3 2.3 6.3 5.5 7.5 3.2-1.2 5.5-4.2 5.5-7.5V3.2L8 1Z"/></svg>
+          Entre no grupo exclusivo do WhatsApp para receber o link da live e seja um dos primeiros a conhecer as condições especiais da Black Ensinio.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Faixa: elementos de apoio -->
+  <div class="marquee" aria-label="IA, Automações, CRM, Vendas — tudo em um só lugar">
+    <div class="ribbon ribbon--back" aria-hidden="true">
+      <div class="marquee__track">
+        <span>IA</span><span>Automações</span><span>CRM</span><span>Vendas</span><span>Tudo em um só lugar</span>
+        <span>IA</span><span>Automações</span><span>CRM</span><span>Vendas</span><span>Tudo em um só lugar</span>
+        <span>IA</span><span>Automações</span><span>CRM</span><span>Vendas</span><span>Tudo em um só lugar</span>
+        <span>IA</span><span>Automações</span><span>CRM</span><span>Vendas</span><span>Tudo em um só lugar</span>
+      </div>
+    </div>
+    <div class="ribbon ribbon--front" aria-hidden="true">
+      <div class="marquee__track">
+        <span>IA</span><span>Automações</span><span>CRM</span><span>Vendas</span><span>Tudo em um só lugar</span>
+        <span>IA</span><span>Automações</span><span>CRM</span><span>Vendas</span><span>Tudo em um só lugar</span>
+        <span>IA</span><span>Automações</span><span>CRM</span><span>Vendas</span><span>Tudo em um só lugar</span>
+        <span>IA</span><span>Automações</span><span>CRM</span><span>Vendas</span><span>Tudo em um só lugar</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═════════ INSCRIÇÃO ═════════ -->
+  <section class="signup" id="inscricao">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="eyebrow"><span class="dot"></span>Salve esta data</span>
+        <h2 class="section-title">Garanta sua vaga <em>na live</em></h2>
+        <p class="section-lead">Preencha seus dados abaixo e receba o link de acesso no dia do evento.</p>
+      </div>
+
+      <div class="signup__grid">
+        <div class="ticket reveal" aria-hidden="true">
+          <span class="ticket__notch ticket__notch--l"></span><span class="ticket__notch ticket__notch--r"></span>
+          <div class="ticket__top">
+            <span class="ticket__kicker">Live exclusiva<br>Edição Black Friday</span>
+            <img class="ticket__sym" src="../assets/ensinio-simbolo.png" alt="" width="231" height="400">
+          </div>
+          <div class="ticket__brand">
+            <span>Black</span>
+            <img src="../assets/logo_ensinio.png" alt="" width="350" height="66">
+            <b>Nova Era</b>
+          </div>
+          <div class="ticket__cut"></div>
+          <div class="ticket__date">11 NOV 2026 · 20H</div>
+          <div class="ticket__where">Ao vivo · online</div>
+          <div class="ticket__bar"></div>
+          <div class="ticket__code"><span>IA · Automações · CRM · Vendas</span><span>Nº 1111</span></div>
+        </div>
+
+        <div class="lead__card reveal">
+          <h3 class="lead__title">Preencha seus dados</h3>
+          <div class="lead__chips">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>11 de novembro</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>20h</span>
+          </div>
+
+          <form class="lead__form" id="lead-form" novalidate>
+            <div class="field">
+              <label for="lead-nome">Nome</label>
+              <input id="lead-nome" name="nome" type="text" autocomplete="name" autocapitalize="words" placeholder="Seu nome" required>
+              <p class="field__err">Digite seu nome.</p>
+            </div>
+            <div class="field">
+              <label for="lead-email">E-mail</label>
+              <input id="lead-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Seu melhor e-mail" required>
+              <p class="field__err">Digite um e-mail válido.</p>
+            </div>
+            <div class="field">
+              <label for="lead-whats">WhatsApp</label>
+              <input id="lead-whats" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(11) 99999-9999" maxlength="15" required>
+              <p class="field__err">Digite um WhatsApp válido, com DDD.</p>
+            </div>
+            <button class="btn btn--primary" type="submit">
+              Inscreva-se para participar
+              <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </button>
+          </form>
+          <p class="lead__legal">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1 2.5 3.2v4.3c0 3.3 2.3 6.3 5.5 7.5 3.2-1.2 5.5-4.2 5.5-7.5V3.2L8 1Z"/></svg>
+            De acordo com as Leis 12.965/2014 e 13.709/2018, que regulam o uso da internet e o tratamento de dados pessoais no Brasil, autorizo a Ensinio a enviar notificações por e-mail, WhatsApp ou outros meios e concordo com sua Política de Privacidade.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ HUB DE CONEXÕES ═════════ -->
+  <section class="section hub" id="conexoes">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="eyebrow"><span class="dot"></span>Ecossistema Ensinio</span>
+        <h2 class="section-title">Todas as pontas do seu negócio, <em>conectadas em um só lugar</em>.</h2>
+        <p class="section-lead">Canais, ferramentas e time comercial trabalhando juntos, com tudo convergindo para o que importa: vendas.</p>
+      </div>
+
+      <div class="hub__stage reveal" id="hub" aria-label="WhatsApp, Instagram, e-mail, páginas, comunidade, IA de voz, automação, CRM, checkout e comercial conectados à Ensinio, gerando vendas">
+        <svg class="hub__wires" aria-hidden="true"></svg>
+        <div class="hub__col hub__col--l">
+          <div class="node" data-node><span class="node__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3Z"/><path d="M9 8.5c.2-.3.6-.3.8 0l.9 1.8c.1.3 0 .6-.2.8l-.5.5a6 6 0 0 0 3.4 3.4l.5-.5c.2-.2.5-.3.8-.2l1.8.9c.3.2.3.6 0 .8-.8 1-2 1.4-3.2.9a10 10 0 0 1-5.2-5.2c-.5-1.2-.1-2.4.9-3.2Z" fill="currentColor" stroke="none"/></svg></span><span>WhatsApp</span></div>
+          <div class="node" data-node><span class="node__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01" stroke-width="2.6"/></svg></span><span>Instagram</span></div>
+          <div class="node" data-node><span class="node__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg></span><span>E-mail</span></div>
+          <div class="node" data-node><span class="node__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg></span><span>Páginas</span></div>
+          <div class="node" data-node><span class="node__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.8a3.2 3.2 0 0 1 0 6.4M18 14.3c1.8.8 3 2.6 3 4.7"/></svg></span><span>Comunidade</span></div>
+        </div>
+        <div class="hub__core">
+          <span class="core__ring" aria-hidden="true"></span><span class="core__ring" aria-hidden="true"></span><span class="core__ring" aria-hidden="true"></span>
+          <span class="core__orbit" aria-hidden="true"></span>
+          <div class="core"><img src="../assets/ensinio-simbolo.png" alt="Ensinio" width="231" height="400"></div>
+        </div>
+        <div class="hub__col hub__col--r">
+          <div class="node" data-node><span class="node__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg></span><span>IA de voz</span></div>
+          <div class="node" data-node><span class="node__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span><span>Automação</span></div>
+          <div class="node" data-node><span class="node__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="11" rx="1.5"/><rect x="17" y="4" width="4" height="7" rx="1.5"/></svg></span><span>CRM</span></div>
+          <div class="node" data-node><span class="node__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6.5 15h4"/></svg></span><span>Checkout</span></div>
+          <div class="node" data-node><span class="node__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7M3 13h18"/></svg></span><span>Comercial</span></div>
+        </div>
+        <div class="hub__out">
+          <div class="sales">
+            <span class="sales__port" aria-hidden="true"></span>
+            <ul class="sales__feed" aria-hidden="true">
+              <li>Venda aprovada <span>via WhatsApp</span></li>
+              <li>Venda aprovada <span>via IA de voz</span></li>
+              <li>Venda aprovada <span>via Checkout</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ JORNADA ═════════ -->
+  <section class="section" id="jornada">
+    <div class="wrap">
+      <div class="section__head reveal" style="align-items: center; text-align: center;">
+        <span class="eyebrow"><span class="dot"></span>Tudo conectado</span>
+        <h2 class="section-title">Uma única jornada, <em>do lead à venda</em>.</h2>
+      </div>
+
+      <div class="journey">
+        <div class="step reveal">
+          <div class="step__n"></div>
+          <div>
+            <h3>Captação</h3>
+            <p>Leads chegam e são organizados automaticamente no seu CRM.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step__n"></div>
+          <div>
+            <h3>Atendimento</h3>
+            <p>A IA responde na hora, tira dúvidas e qualifica cada contato.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step__n"></div>
+          <div>
+            <h3>Fechamento</h3>
+            <p>O lead é conduzido até o checkout e a venda acontece.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ CTA FINAL ═════════ -->
+  <section class="final">
+    <div class="wrap">
+      <div class="final__card reveal">
+        <div class="unseen">
+          <span class="unseen__inner">
+            <span class="unseen__tag">Inédito</span>
+            <span class="unseen__text">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.2 6.3L21 9l-5.3 4 1.9 6.6L12 15.8 6.4 19.6 8.3 13 3 9l6.8-.7L12 2Z"/></svg>
+              Condição nunca feita antes
+            </span>
+          </span>
+        </div>
+        <h2 class="section-title">A Nova Era começa ao vivo em <em>11/11 às 20h</em>.</h2>
+        <p class="section-lead">Uma live especial, ao vivo, para revelar <strong>uma condição nunca antes feita pela Ensinio</strong>. Quem está no grupo recebe a condição em primeira mão.</p>
+        <p class="final__date">Live exclusiva · Edição Black Friday</p>
+        <a class="btn btn--primary" href="#inscricao" data-cta="quero-ser-avisado">
+          <svg class="wa" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M16 3.5A12.5 12.5 0 0 0 5.2 22.3L3.6 28.4l6.3-1.6A12.5 12.5 0 1 0 16 3.5Z" stroke-linejoin="round"/>
+            <path d="M11.6 9.8c.3-.3.8-.3 1 .1l1.3 2.6c.2.4.1.8-.2 1.1l-.8.8a8.3 8.3 0 0 0 4.7 4.7l.8-.8c.3-.3.7-.4 1.1-.2l2.6 1.3c.4.2.4.7.1 1-1.1 1.4-2.7 1.9-4.4 1.2a14 14 0 0 1-7.3-7.3c-.7-1.7-.2-3.3 1.1-4.5Z" fill="currentColor" stroke="none"/>
+          </svg>
+          Quero participar da Black ENSINIO
+          <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+        <p class="micro">Entre no grupo exclusivo do WhatsApp para receber o link da live e seja um dos primeiros a conhecer as condições especiais da Black Ensinio.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <img src="../assets/logo_ensinio.png" alt="Ensinio" width="350" height="66">
+      <small>IA • Automações • CRM • Vendas • Tudo em um só lugar</small>
+    </div>
+  </footer>
+
+  <script>
+    // Contagem regressiva até o lançamento (horário de Brasília)
+    (function () {
+      const box = document.querySelector('[data-countdown]');
+      const target = new Date(box.dataset.countdown).getTime();
+      const out = { d: box.querySelector('[data-u="d"]'), h: box.querySelector('[data-u="h"]'), m: box.querySelector('[data-u="m"]'), s: box.querySelector('[data-u="s"]') };
+      const pad = (n) => String(n).padStart(2, '0');
+      function tick() {
+        let diff = Math.max(0, Math.floor((target - Date.now()) / 1000));
+        out.d.textContent = pad(Math.floor(diff / 86400)); diff %= 86400;
+        out.h.textContent = pad(Math.floor(diff / 3600));  diff %= 3600;
+        out.m.textContent = pad(Math.floor(diff / 60));
+        out.s.textContent = pad(diff % 60);
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
+
+    // Hub: desenha as linhas de cada conexão até o logo e do logo até "Vendas"
+    (function () {
+      const stage = document.getElementById('hub');
+      if (!stage) return;
+      const svg = stage.querySelector('.hub__wires');
+      const core = stage.querySelector('.core');
+      const sales = stage.querySelector('.sales');
+      const nodes = [...stage.querySelectorAll('[data-node]')];
+      const NS = 'http://www.w3.org/2000/svg';
+      const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function el(tag, attrs) {
+        const e = document.createElementNS(NS, tag);
+        for (const k in attrs) e.setAttribute(k, attrs[k]);
+        return e;
+      }
+      function wire(d, i, out) {
+        const base = el('path', { d, class: 'wire' + (out ? ' wire--out' : '') });
+        svg.appendChild(base);
+        const len = base.getTotalLength();
+        base.style.setProperty('--len', len);
+        base.style.setProperty('--d', (out ? 1.1 : i * .07) + 's');
+        svg.appendChild(el('path', { d, class: 'wire-flow' + (out ? ' wire-flow--out' : '') }));
+        if (!still) {
+          const dot = el('circle', { r: out ? 3.5 : 2.6, class: 'spark-dot' });
+          const dur = out ? 1.4 : 2.2 + Math.random() * 1.2;
+          dot.appendChild(el('animateMotion', { dur: dur + 's', begin: (-Math.random() * dur) + 's', repeatCount: 'indefinite', path: d, keyPoints: '0;1', keyTimes: '0;1', calcMode: 'spline', keySplines: '.5 0 .5 1' }));
+          svg.appendChild(dot);
+        }
+        return base;
+      }
+
+      function draw() {
+        svg.textContent = '';
+        const s = stage.getBoundingClientRect();
+        svg.setAttribute('viewBox', `0 0 ${s.width} ${s.height}`);
+        const c = core.getBoundingClientRect();
+        const cx = c.left - s.left + c.width / 2, cy = c.top - s.top + c.height / 2, r = c.width / 2;
+
+        nodes.forEach((n, i) => {
+          const b = n.getBoundingClientRect();
+          const left = b.left + b.width / 2 < c.left;
+          const x1 = left ? b.right - s.left : b.left - s.left;
+          const y1 = b.top - s.top + b.height / 2;
+          const ang = Math.atan2(y1 - cy, x1 - cx);
+          const x2 = cx + Math.cos(ang) * r, y2 = cy + Math.sin(ang) * r;
+          const k = Math.abs(x2 - x1) * .55;
+          const d = `M${x1},${y1} C${x1 + (left ? k : -k)},${y1} ${x2 + (left ? -k * .35 : k * .35)},${y2} ${x2},${y2}`;
+          const p = wire(d, i, false);
+          n.onmouseenter = () => p.classList.add('is-hot');
+          n.onmouseleave = () => p.classList.remove('is-hot');
+        });
+
+        const sb = sales.getBoundingClientRect();
+        const yEnd = sb.top - s.top;
+        const defs = el('defs', {});
+        const g = el('linearGradient', { id: 'outGrad', gradientUnits: 'userSpaceOnUse', x1: cx, y1: cy + r, x2: cx, y2: yEnd });
+        g.appendChild(el('stop', { offset: '0', 'stop-color': '#a5a3ff' }));
+        g.appendChild(el('stop', { offset: '1', 'stop-color': '#3b37ff' }));
+        defs.appendChild(g);
+        svg.prepend(defs);
+        wire(`M${cx},${cy + r} L${cx},${yEnd}`, 0, true);
+      }
+
+      // Feed de vendas chegando de cada canal
+      const feed = stage.querySelector('.sales__feed');
+      const sources = ['WhatsApp', 'Instagram', 'IA de voz', 'Checkout', 'E-mail', 'Comercial', 'Automação', 'Páginas', 'Comunidade', 'CRM'];
+      let si = 3;
+      if (!still) setInterval(() => {
+        if (!stage.classList.contains('in')) return;
+        const li = document.createElement('li');
+        li.innerHTML = `Venda aprovada <span>via ${sources[si++ % sources.length]}</span>`;
+        feed.prepend(li);
+        if (feed.children.length > 4) feed.lastElementChild.remove();
+      }, 2200);
+
+      draw();
+      let t, lastW = 0;
+      const redraw = () => { clearTimeout(t); t = setTimeout(draw, 80); };
+      if ('ResizeObserver' in window) {
+        new ResizeObserver(([e]) => { const w = Math.round(e.contentRect.width); if (w !== lastW) { lastW = w; redraw(); } }).observe(stage);
+      } else addEventListener('resize', redraw);
+      if (document.fonts) document.fonts.ready.then(draw);
+    })();
+
+    // Revelação suave dos blocos ao rolar
+    (function () {
+      const els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('in')); return; }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: .15 });
+      els.forEach((el) => io.observe(el));
+    })();
+
+    // Inscrição: os botões de CTA rolam até o formulário; após o envio, vai para a página de obrigado
+    (function () {
+      const form = document.getElementById('lead-form');
+      const nome = form.elements.nome;
+      const email = form.elements.email;
+      const whats = form.elements.whatsapp;
+      const submit = form.querySelector('[type="submit"]');
+      const THANKS_URL = 'obrigado/';
+
+      // TODO: ligar o envio (webhook, planilha ou CRM). Deve resolver quando o lead for gravado.
+      function enviarLead(dados) {
+        return Promise.resolve(dados);
+      }
+
+      document.querySelectorAll('[data-cta]').forEach((a) => a.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('inscricao').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => nome.focus({ preventScroll: true }), 600);
+      }));
+
+      // Máscara (00) 00000-0000
+      whats.addEventListener('input', () => {
+        const d = whats.value.replace(/\D/g, '').slice(0, 11);
+        let v = d;
+        if (d.length > 2) v = `(${d.slice(0, 2)}) ${d.slice(2)}`;
+        if (d.length > 6) v = `(${d.slice(0, 2)}) ${d.slice(2, d.length - 4)}-${d.slice(-4)}`;
+        whats.value = v;
+      });
+
+      const okNome = () => nome.value.trim().length >= 2;
+      const okEmail = () => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim());
+      const okWhats = () => /^[1-9]{2}9?\d{8}$/.test(whats.value.replace(/\D/g, ''));
+      const mark = (input, ok) => input.closest('.field').classList.toggle('is-bad', !ok);
+      nome.addEventListener('blur', () => nome.value && mark(nome, okNome()));
+      email.addEventListener('blur', () => email.value && mark(email, okEmail()));
+      whats.addEventListener('blur', () => whats.value && mark(whats, okWhats()));
+      nome.addEventListener('input', () => okNome() && mark(nome, true));
+      email.addEventListener('input', () => okEmail() && mark(email, true));
+      whats.addEventListener('input', () => okWhats() && mark(whats, true));
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const e0 = okNome(), e1 = okEmail(), e2 = okWhats();
+        mark(nome, e0); mark(email, e1); mark(whats, e2);
+        if (!e0) return nome.focus();
+        if (!e1) return email.focus();
+        if (!e2) return whats.focus();
+
+        const params = new URLSearchParams(location.search);
+        const dados = {
+          nome: nome.value.trim().replace(/\s+/g, ' '),
+          email: email.value.trim().toLowerCase(),
+          whatsapp: '55' + whats.value.replace(/\D/g, ''),
+          pagina: 'black02',
+          utm_source: params.get('utm_source') || '',
+          utm_medium: params.get('utm_medium') || '',
+          utm_campaign: params.get('utm_campaign') || '',
+          utm_content: params.get('utm_content') || '',
+          utm_term: params.get('utm_term') || '',
+          enviado_em: new Date().toISOString()
+        };
+        submit.disabled = true;
+        submit.firstChild.textContent = 'Enviando… ';
+        enviarLead(dados)
+          .catch(() => {}) // segue para o obrigado mesmo se o envio falhar
+          .then(() => { location.href = THANKS_URL + location.search; });
+      });
+    })();
+  </script>
+</body>
+</html>
