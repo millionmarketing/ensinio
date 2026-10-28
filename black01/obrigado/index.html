@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Black Ensinio · Inscrição confirmada</title>
+  <link rel="icon" href="../../assets/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Domine:wght@500;600;700&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* Design system Ensinio (mesmo da página da live) */
+    :root {
+      --bg: #000000;
+      --surface: #0a0a0c;
+      --border: #262626;
+      --blue: #3b37ff;
+      --blue-hi: #6b68ff;
+      --blue-soft: #a5a3ff;
+      --blue-deep: #1d1a9e;
+      --white: #ffffff;
+      --text: #ededed;
+      --muted: #a1a1aa;
+      --dim: #71717a;
+      --font-head: "Domine", Georgia, serif;
+      --font-body: "Geist", ui-sans-serif, system-ui, sans-serif;
+      --font-mono: "Geist Mono", ui-monospace, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--white); }
+    body { font-family: var(--font-body); -webkit-font-smoothing: antialiased; line-height: 1.5; min-height: 100svh; display: flex; flex-direction: column; overflow-x: hidden; isolation: isolate; position: relative; }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; }
+
+    .bg-grid {
+      position: fixed; inset: 0; z-index: -2;
+      background:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px) 0 0 / 64px 64px,
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px) 0 0 / 64px 64px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%);
+    }
+    .bg-aurora {
+      position: fixed; left: 50%; top: -30%; width: 1200px; height: 820px; z-index: -1; transform: translateX(-50%);
+      background: radial-gradient(closest-side, rgba(59,55,255,.5), rgba(29,26,158,.22) 55%, transparent);
+      filter: blur(20px);
+    }
+
+    header { padding: 28px 16px 0; display: flex; justify-content: center; }
+    header img { height: 26px; width: auto; }
+
+    main { flex: 1; display: grid; place-items: center; padding: 40px 16px 56px; }
+    .card {
+      width: min(620px, 100%); padding: 48px 40px 40px; text-align: center;
+      border: 1px solid var(--border); border-radius: 24px; position: relative; overflow: hidden;
+      background: radial-gradient(120% 70% at 50% -10%, rgba(59,55,255,.28), transparent 60%), rgba(10,10,12,.85);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 30px 120px rgba(59,55,255,.25);
+      animation: rise .7s cubic-bezier(.2,.7,.2,1);
+    }
+    .card::before { content: ""; position: absolute; left: 15%; right: 15%; top: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--blue-hi), transparent); }
+    @keyframes rise { from { opacity: 0; transform: translateY(20px); } }
+
+    .steps { display: flex; align-items: center; justify-content: center; gap: 10px; font: 500 11px/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+    .steps b { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
+    .steps b::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #2a2a30; }
+    .steps b.done { color: var(--blue-soft); }
+    .steps b.done::before { background: var(--blue-soft); }
+    .steps b.now { color: #fff; }
+    .steps b.now::before { background: var(--blue); box-shadow: 0 0 10px var(--blue); animation: pulse 2s ease-in-out infinite; }
+    .steps i { width: 28px; height: 1px; background: var(--border); }
+    @keyframes pulse { 50% { box-shadow: 0 0 18px 2px var(--blue); opacity: .7; } }
+
+    .check {
+      margin: 30px auto 0; width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center;
+      background: radial-gradient(circle at 50% 35%, var(--blue-hi), var(--blue) 60%, var(--blue-deep));
+      box-shadow: 0 0 0 8px rgba(59,55,255,.12), 0 0 50px rgba(59,55,255,.6);
+    }
+    .check svg { width: 34px; height: 34px; }
+    .check path { stroke-dasharray: 30; stroke-dashoffset: 30; animation: draw .6s .4s ease forwards; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+
+    h1 { margin-top: 26px; font: 600 clamp(26px, 5vw, 38px)/1.15 var(--font-head); letter-spacing: -.015em; text-wrap: balance; }
+    h1 em { font-style: normal; color: var(--blue-soft); }
+    .lead { margin: 14px auto 0; max-width: 460px; color: var(--muted); font-size: 17px; text-wrap: pretty; }
+    .lead strong { color: var(--text); font-weight: 600; }
+
+    .btn {
+      position: relative; margin-top: 30px; width: 100%;
+      display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+      padding: 20px 28px; border-radius: 999px;
+      font: 600 16px/1 var(--font-body); letter-spacing: .04em; text-transform: uppercase;
+      background: var(--blue); color: #fff;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.14) inset, 0 10px 40px rgba(59,55,255,.45);
+      transition: transform .2s ease, box-shadow .25s ease, background .25s ease;
+    }
+    .btn::before {
+      content: ""; position: absolute; inset: 0; border-radius: inherit;
+      background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.28) 48%, transparent 66%) -200% 0 / 250% 100% no-repeat;
+      animation: sheen 3.5s ease-in-out infinite;
+    }
+    @keyframes sheen { 0%, 50% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    .btn:hover { transform: translateY(-2px); background: #4a46ff; box-shadow: 0 0 0 1px rgba(255,255,255,.22) inset, 0 16px 56px rgba(59,55,255,.7); }
+    .btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+    .btn svg.wa { width: 22px; height: 22px; flex: none; }
+    .btn svg.arrow { width: 16px; height: 16px; flex: none; transition: transform .2s ease; }
+    .btn:hover svg.arrow { transform: translateX(4px); }
+
+    .warn { margin-top: 14px; font-size: 13.5px; color: var(--dim); }
+
+    .info {
+      margin-top: 32px; padding-top: 26px; border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: left;
+    }
+    .info div { font-size: 14px; color: var(--muted); }
+    .info span { display: block; margin-bottom: 6px; font: 500 10.5px/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+    .info strong { color: var(--text); font-weight: 600; }
+
+    footer { border-top: 1px solid var(--border); padding: 22px 16px; text-align: center; }
+    footer small { color: var(--dim); font-size: 13px; }
+
+    @media (max-width: 600px) {
+      header img { height: 22px; }
+      .card { padding: 36px 20px 28px; border-radius: 20px; }
+      .steps { gap: 6px; font-size: 9.5px; letter-spacing: .08em; }
+      .steps i { width: 14px; }
+      .btn { padding: 18px 18px; font-size: 14.5px; gap: 10px; }
+      .info { grid-template-columns: 1fr; gap: 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .check path { stroke-dashoffset: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-aurora" aria-hidden="true"></div>
+
+  <header>
+    <a href="https://ensinio.com/" aria-label="Ensinio"><img src="../../assets/logo_ensinio.png" alt="Ensinio" width="350" height="66"></a>
+  </header>
+
+  <main>
+    <div class="card">
+      <div class="steps" aria-label="Etapa 2 de 2">
+        <b class="done">Cadastro</b><i></i><b class="now">Entrar no grupo</b>
+      </div>
+
+      <div class="check" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      </div>
+
+      <h1>Falta só um passo: <em>entre no grupo</em></h1>
+      <p class="lead">Seu cadastro foi feito. O link da live e a <strong>condição inédita da Black Ensinio</strong> serão enviados primeiro no grupo exclusivo do WhatsApp.</p>
+
+      <!-- TODO: colocar o link do grupo de WhatsApp -->
+      <a class="btn" href="#" data-whatsapp target="_blank" rel="noopener">
+        <svg class="wa" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M16 3.5A12.5 12.5 0 0 0 5.2 22.3L3.6 28.4l6.3-1.6A12.5 12.5 0 1 0 16 3.5Z" stroke-linejoin="round"/>
+          <path d="M11.6 9.8c.3-.3.8-.3 1 .1l1.3 2.6c.2.4.1.8-.2 1.1l-.8.8a8.3 8.3 0 0 0 4.7 4.7l.8-.8c.3-.3.7-.4 1.1-.2l2.6 1.3c.4.2.4.7.1 1-1.1 1.4-2.7 1.9-4.4 1.2a14 14 0 0 1-7.3-7.3c-.7-1.7-.2-3.3 1.1-4.5Z" fill="currentColor" stroke="none"/>
+        </svg>
+        Entrar no grupo do WhatsApp
+        <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      <p class="warn">Sem entrar no grupo, você pode perder o link da live.</p>
+
+      <div class="info">
+        <div><span>Quando</span><strong>11/11 às 20h</strong></div>
+        <div><span>Onde</span><strong>Ao vivo, online</strong></div>
+        <div><span>O que</span><strong>Condição inédita</strong></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <small>IA • Automações • CRM • Vendas • Tudo em um só lugar</small>
+  </footer>
+</body>
+</html>

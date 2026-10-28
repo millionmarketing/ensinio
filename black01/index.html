@@ -398,6 +398,52 @@
     footer img { height: 18px; width: auto; opacity: .85; }
     footer small { color: var(--dim); font-size: 13px; }
 
+    /* ───────── POPUP DE CAPTURA ───────── */
+    .lead { width: min(460px, 100% - 32px); max-height: calc(100svh - 32px); margin: auto; padding: 0; border: 0; background: transparent; color: var(--white); overflow: visible; }
+    .lead::backdrop { background: rgba(0, 0, 0, .72); backdrop-filter: blur(6px); }
+    .lead[open] { animation: leadIn .35s cubic-bezier(.2,.7,.2,1); }
+    .lead[open]::backdrop { animation: fadeIn .3s ease; }
+    @keyframes leadIn { from { opacity: 0; transform: translateY(18px) scale(.97); } }
+    @keyframes fadeIn { from { opacity: 0; } }
+    .lead__card {
+      position: relative; padding: 40px 32px 30px; border-radius: 20px; overflow: hidden;
+      border: 1px solid var(--border);
+      background: radial-gradient(120% 70% at 50% -10%, rgba(59,55,255,.32), transparent 60%), var(--surface);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.04) inset, 0 30px 120px rgba(59,55,255,.35);
+      text-align: center;
+    }
+    .lead__card::before { content: ""; position: absolute; left: 15%; right: 15%; top: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--blue-hi), transparent); }
+    .lead__close {
+      position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; display: grid; place-items: center;
+      border: 1px solid var(--border); border-radius: 50%; background: #141417; color: var(--muted); cursor: pointer;
+      transition: color .2s ease, border-color .2s ease;
+    }
+    .lead__close:hover { color: #fff; border-color: #3a3a3a; }
+    .lead__close:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+    .lead__close svg { width: 14px; height: 14px; }
+    .lead .eyebrow { font-size: 11px; }
+    .lead__title { margin-top: 18px; font: 600 clamp(22px, 5vw, 27px)/1.2 var(--font-head); letter-spacing: -.01em; text-wrap: balance; }
+    .lead__title em { font-style: normal; color: var(--blue-soft); }
+    .lead__text { margin-top: 10px; color: var(--muted); font-size: 15px; text-wrap: pretty; }
+    .lead__form { margin-top: 24px; display: grid; gap: 14px; text-align: left; }
+    .field label { display: block; margin-bottom: 7px; font: 500 11px/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    .field input {
+      width: 100%; padding: 15px 16px; border-radius: var(--radius);
+      border: 1px solid var(--border); background: #0e0e11; color: #fff;
+      font: 400 16px/1.2 var(--font-body);
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .field input::placeholder { color: #52525b; }
+    .field input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,55,255,.3); }
+    .field.is-bad input { border-color: #f0475a; }
+    .field__err { display: none; margin-top: 6px; font-size: 13px; color: #ff7a88; }
+    .field.is-bad .field__err { display: block; }
+    .lead__form .btn { width: 100%; margin-top: 6px; padding: 18px 20px; font-size: 15px; cursor: pointer; border: 0; }
+    .lead__form .btn[disabled] { opacity: .7; cursor: progress; }
+    .lead__note { margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12.5px; color: var(--dim); }
+    .lead__note svg { width: 12px; height: 12px; color: var(--blue-hi); flex: none; }
+    @media (max-width: 760px) { .lead__card { padding: 36px 20px 24px; } }
+
     /* Revelação ao rolar */
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
     .reveal.in { opacity: 1; transform: none; }
@@ -486,7 +532,6 @@
       </div>
 
       <div class="hero__cta">
-        <!-- TODO: trocar pelo link do grupo de WhatsApp -->
         <a class="btn btn--primary" href="#" data-cta="quero-ser-avisado">
           <svg class="wa" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M16 3.5A12.5 12.5 0 0 0 5.2 22.3L3.6 28.4l6.3-1.6A12.5 12.5 0 1 0 16 3.5Z" stroke-linejoin="round"/>
@@ -637,6 +682,39 @@
     </div>
   </footer>
 
+  <!-- ═════════ POPUP DE CAPTURA ═════════ -->
+  <dialog class="lead" id="lead" aria-labelledby="lead-title">
+    <div class="lead__card">
+      <button class="lead__close" type="button" data-close aria-label="Fechar">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3l10 10M13 3 3 13"/></svg>
+      </button>
+      <span class="eyebrow"><span class="dot"></span>Live · 11/11 às 20h</span>
+      <h2 class="lead__title" id="lead-title">Garanta seu lugar na <em>Black Ensinio</em></h2>
+      <p class="lead__text">Deixe seus dados para receber o link da live e a condição inédita em primeira mão.</p>
+
+      <form class="lead__form" id="lead-form" novalidate>
+        <div class="field">
+          <label for="lead-email">E-mail</label>
+          <input id="lead-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="seu@email.com" required>
+          <p class="field__err">Digite um e-mail válido.</p>
+        </div>
+        <div class="field">
+          <label for="lead-whats">WhatsApp</label>
+          <input id="lead-whats" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(11) 99999-9999" maxlength="15" required>
+          <p class="field__err">Digite um WhatsApp válido, com DDD.</p>
+        </div>
+        <button class="btn btn--primary" type="submit">
+          Quero participar
+          <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </button>
+      </form>
+      <p class="lead__note">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1 2.5 3.2v4.3c0 3.3 2.3 6.3 5.5 7.5 3.2-1.2 5.5-4.2 5.5-7.5V3.2L8 1Z"/></svg>
+        Seus dados estão seguros. Nada de spam.
+      </p>
+    </div>
+  </dialog>
+
   <script>
     // Contagem regressiva até o lançamento (horário de Brasília)
     (function () {
@@ -750,10 +828,71 @@
       els.forEach((el) => io.observe(el));
     })();
 
-    // TODO: integrar com o link definitivo do grupo
-    document.querySelectorAll('[data-cta]').forEach((a) => a.addEventListener('click', (e) => {
-      if (a.getAttribute('href') === '#') e.preventDefault();
-    }));
+    // Popup de captura: os botões de CTA abrem o formulário; após o envio, vai para a página de obrigado
+    (function () {
+      const dialog = document.getElementById('lead');
+      const form = document.getElementById('lead-form');
+      const email = form.elements.email;
+      const whats = form.elements.whatsapp;
+      const submit = form.querySelector('[type="submit"]');
+      const THANKS_URL = 'obrigado/';
+
+      // TODO: ligar o envio (webhook, planilha ou CRM). Deve resolver quando o lead for gravado.
+      function enviarLead(dados) {
+        return Promise.resolve(dados);
+      }
+
+      document.querySelectorAll('[data-cta]').forEach((a) => a.addEventListener('click', (e) => {
+        e.preventDefault();
+        dialog.showModal();
+        email.focus();
+      }));
+      dialog.querySelector('[data-close]').addEventListener('click', () => dialog.close());
+      dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+
+      // Máscara (00) 00000-0000
+      whats.addEventListener('input', () => {
+        const d = whats.value.replace(/\D/g, '').slice(0, 11);
+        let v = d;
+        if (d.length > 2) v = `(${d.slice(0, 2)}) ${d.slice(2)}`;
+        if (d.length > 6) v = `(${d.slice(0, 2)}) ${d.slice(2, d.length - 4)}-${d.slice(-4)}`;
+        whats.value = v;
+      });
+
+      const okEmail = () => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim());
+      const okWhats = () => /^[1-9]{2}9?\d{8}$/.test(whats.value.replace(/\D/g, ''));
+      const mark = (input, ok) => input.closest('.field').classList.toggle('is-bad', !ok);
+      email.addEventListener('blur', () => email.value && mark(email, okEmail()));
+      whats.addEventListener('blur', () => whats.value && mark(whats, okWhats()));
+      email.addEventListener('input', () => okEmail() && mark(email, true));
+      whats.addEventListener('input', () => okWhats() && mark(whats, true));
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const e1 = okEmail(), e2 = okWhats();
+        mark(email, e1); mark(whats, e2);
+        if (!e1) return email.focus();
+        if (!e2) return whats.focus();
+
+        const params = new URLSearchParams(location.search);
+        const dados = {
+          email: email.value.trim().toLowerCase(),
+          whatsapp: '55' + whats.value.replace(/\D/g, ''),
+          pagina: 'black01',
+          utm_source: params.get('utm_source') || '',
+          utm_medium: params.get('utm_medium') || '',
+          utm_campaign: params.get('utm_campaign') || '',
+          utm_content: params.get('utm_content') || '',
+          utm_term: params.get('utm_term') || '',
+          enviado_em: new Date().toISOString()
+        };
+        submit.disabled = true;
+        submit.firstChild.textContent = 'Enviando… ';
+        enviarLead(dados)
+          .catch(() => {}) // segue para o obrigado mesmo se o envio falhar
+          .then(() => { location.href = THANKS_URL + location.search; });
+      });
+    })();
   </script>
 </body>
 </html>
