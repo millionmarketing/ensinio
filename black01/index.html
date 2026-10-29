@@ -436,6 +436,21 @@
     .field input::placeholder { color: #52525b; }
     .field input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,55,255,.3); }
     .field.is-bad input { border-color: #f0475a; }
+    .phone {
+      display: flex; align-items: stretch; border: 1px solid var(--border); border-radius: var(--radius); background: #0e0e11;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .phone:focus-within { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,55,255,.3); }
+    .field.is-bad .phone { border-color: #f0475a; }
+    .phone select {
+      flex: none; appearance: none; -webkit-appearance: none; cursor: pointer;
+      padding: 0 30px 0 14px; border: 0; border-right: 1px solid var(--border); border-radius: var(--radius) 0 0 var(--radius);
+      color: #fff; font: 500 15px/1 var(--font-body);
+      background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23a1a1aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E") no-repeat right 10px center / 14px;
+    }
+    .phone select:focus { outline: none; }
+    .phone select option { background: #0e0e11; color: #fff; }
+    .field .phone input { flex: 1; min-width: 0; border: 0; background: transparent; box-shadow: none; padding-left: 14px; }
     .field__err { display: none; margin-top: 6px; font-size: 13px; color: #ff7a88; }
     .field.is-bad .field__err { display: block; }
     .lead__form .btn { width: 100%; margin-top: 6px; padding: 18px 20px; font-size: 15px; cursor: pointer; border: 0; }
@@ -692,8 +707,34 @@
         </div>
         <div class="field">
           <label for="lead-whats">WhatsApp</label>
-          <input id="lead-whats" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(11) 99999-9999" maxlength="15" required>
-          <p class="field__err">Digite um WhatsApp válido, com DDD.</p>
+          <div class="phone">
+            <select name="pais" aria-label="País (DDI)" autocomplete="tel-country-code">
+              <option value="BR" data-dial="55" selected>🇧🇷 +55</option>
+              <option value="PT" data-dial="351">🇵🇹 +351</option>
+              <option value="US" data-dial="1">🇺🇸 +1</option>
+              <option value="CA" data-dial="1">🇨🇦 +1</option>
+              <option value="AR" data-dial="54">🇦🇷 +54</option>
+              <option value="CL" data-dial="56">🇨🇱 +56</option>
+              <option value="CO" data-dial="57">🇨🇴 +57</option>
+              <option value="MX" data-dial="52">🇲🇽 +52</option>
+              <option value="PE" data-dial="51">🇵🇪 +51</option>
+              <option value="PY" data-dial="595">🇵🇾 +595</option>
+              <option value="UY" data-dial="598">🇺🇾 +598</option>
+              <option value="ES" data-dial="34">🇪🇸 +34</option>
+              <option value="IT" data-dial="39">🇮🇹 +39</option>
+              <option value="FR" data-dial="33">🇫🇷 +33</option>
+              <option value="DE" data-dial="49">🇩🇪 +49</option>
+              <option value="GB" data-dial="44">🇬🇧 +44</option>
+              <option value="IE" data-dial="353">🇮🇪 +353</option>
+              <option value="CH" data-dial="41">🇨🇭 +41</option>
+              <option value="AO" data-dial="244">🇦🇴 +244</option>
+              <option value="MZ" data-dial="258">🇲🇿 +258</option>
+              <option value="JP" data-dial="81">🇯🇵 +81</option>
+              <option value="AU" data-dial="61">🇦🇺 +61</option>
+            </select>
+            <input id="lead-whats" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(11) 99999-9999" maxlength="15" required>
+          </div>
+          <p class="field__err">Digite um WhatsApp válido, com código de área (DDD).</p>
         </div>
         <button class="btn btn--primary" type="submit">
           Quero participar
@@ -843,18 +884,44 @@
       dialog.querySelector('[data-close]').addEventListener('click', () => dialog.close());
       dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
 
-      // Máscara (00) 00000-0000
-      whats.addEventListener('input', () => {
-        const d = whats.value.replace(/\D/g, '').slice(0, 11);
-        let v = d;
-        if (d.length > 2) v = `(${d.slice(0, 2)}) ${d.slice(2)}`;
-        if (d.length > 6) v = `(${d.slice(0, 2)}) ${d.slice(2, d.length - 4)}-${d.slice(-4)}`;
-        whats.value = v;
-      });
+      // Telefone: país (DDI) + máscara com DDD conforme o país
+      const pais = form.elements.pais;
+      const MASKS = { BR: '(00) 00000-0000', PT: '000 000 000', US: '(000) 000-0000', CA: '(000) 000-0000' };
+      const digits = () => whats.value.replace(/\D/g, '');
+      function applyMask() {
+        const m = MASKS[pais.value];
+        const d = digits().slice(0, m ? m.replace(/[^0]/g, '').length : 15);
+        if (!m) return (whats.value = d);
+        if (pais.value === 'BR' && d.length < 11) { // fixo/celular com 8 dígitos: (00) 0000-0000
+          let v = d;
+          if (d.length > 2) v = `(${d.slice(0, 2)}) ${d.slice(2)}`;
+          if (d.length > 6) v = `(${d.slice(0, 2)}) ${d.slice(2, d.length - 4)}-${d.slice(-4)}`;
+          return (whats.value = v);
+        }
+        let out = '', i = 0;
+        for (const ch of m) {
+          if (i >= d.length) break;
+          out += ch === '0' ? d[i++] : ch;
+        }
+        whats.value = out;
+      }
+      function syncPais() {
+        const m = MASKS[pais.value];
+        whats.placeholder = pais.value === 'BR' ? '(11) 99999-9999' : m ? m.replace(/0/g, '9') : 'Número com código de área';
+        whats.maxLength = m ? m.length : 15;
+        applyMask();
+      }
+      whats.addEventListener('input', applyMask);
+      pais.addEventListener('change', () => { syncPais(); whats.focus(); });
+      syncPais();
 
       const okNome = () => nome.value.trim().length >= 2;
       const okEmail = () => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim());
-      const okWhats = () => /^[1-9]{2}9?\d{8}$/.test(whats.value.replace(/\D/g, ''));
+      const okWhats = () => {
+        const d = digits(), m = MASKS[pais.value];
+        if (pais.value === 'BR') return /^[1-9]{2}9?\d{8}$/.test(d);
+        return m ? d.length === m.replace(/[^0]/g, '').length : d.length >= 6 && d.length <= 15;
+      };
       const mark = (input, ok) => input.closest('.field').classList.toggle('is-bad', !ok);
       nome.addEventListener('blur', () => nome.value && mark(nome, okNome()));
       email.addEventListener('blur', () => email.value && mark(email, okEmail()));
@@ -875,7 +942,8 @@
         const dados = {
           nome: nome.value.trim().replace(/\s+/g, ' '),
           email: email.value.trim().toLowerCase(),
-          whatsapp: '55' + whats.value.replace(/\D/g, ''),
+          whatsapp: pais.selectedOptions[0].dataset.dial + digits(),
+          pais: pais.value,
           pagina: 'black01',
           utm_source: params.get('utm_source') || '',
           utm_medium: params.get('utm_medium') || '',
