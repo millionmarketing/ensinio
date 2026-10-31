@@ -425,36 +425,8 @@
     .lead__title { margin-top: 18px; font: 600 clamp(22px, 5vw, 27px)/1.2 var(--font-head); letter-spacing: -.01em; text-wrap: balance; }
     .lead__title em { font-style: normal; color: var(--blue-soft); }
     .lead__text { margin-top: 10px; color: var(--muted); font-size: 15px; text-wrap: pretty; }
-    .lead__form { margin-top: 24px; display: grid; gap: 14px; text-align: left; }
-    .field label { display: block; margin-bottom: 7px; font: 500 11px/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-    .field input {
-      width: 100%; padding: 15px 16px; border-radius: var(--radius);
-      border: 1px solid var(--border); background: #0e0e11; color: #fff;
-      font: 400 16px/1.2 var(--font-body);
-      transition: border-color .2s ease, box-shadow .2s ease;
-    }
-    .field input::placeholder { color: #52525b; }
-    .field input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,55,255,.3); }
-    .field.is-bad input { border-color: #f0475a; }
-    .phone {
-      display: flex; align-items: stretch; border: 1px solid var(--border); border-radius: var(--radius); background: #0e0e11;
-      transition: border-color .2s ease, box-shadow .2s ease;
-    }
-    .phone:focus-within { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,55,255,.3); }
-    .field.is-bad .phone { border-color: #f0475a; }
-    .phone select {
-      flex: none; appearance: none; -webkit-appearance: none; cursor: pointer;
-      padding: 0 30px 0 14px; border: 0; border-right: 1px solid var(--border); border-radius: var(--radius) 0 0 var(--radius);
-      color: #fff; font: 500 15px/1 var(--font-body);
-      background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23a1a1aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E") no-repeat right 10px center / 14px;
-    }
-    .phone select:focus { outline: none; }
-    .phone select option { background: #0e0e11; color: #fff; }
-    .field .phone input { flex: 1; min-width: 0; border: 0; background: transparent; box-shadow: none; padding-left: 14px; }
-    .field__err { display: none; margin-top: 6px; font-size: 13px; color: #ff7a88; }
-    .field.is-bad .field__err { display: block; }
-    .lead__form .btn { width: 100%; margin-top: 6px; padding: 18px 20px; font-size: 15px; cursor: pointer; border: 0; }
-    .lead__form .btn[disabled] { opacity: .7; cursor: progress; }
+    .lead__embed { margin-top: 24px; min-height: 372px; }
+    .lead__embed iframe { display: block; min-height: 372px; background: transparent; color-scheme: normal; }
     .lead__note { margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12.5px; color: var(--dim); }
     .lead__note svg { width: 12px; height: 12px; color: var(--blue-hi); flex: none; }
     @media (max-width: 760px) { .lead__card { padding: 36px 20px 24px; } }
@@ -694,53 +666,26 @@
       <h2 class="lead__title" id="lead-title">Garanta seu lugar na <em>Black Ensinio</em></h2>
       <p class="lead__text">Deixe seus dados para receber o link da live e a condição inédita em primeira mão.</p>
 
-      <form class="lead__form" id="lead-form" novalidate>
-        <div class="field">
-          <label for="lead-nome">Nome</label>
-          <input id="lead-nome" name="nome" type="text" autocomplete="name" autocapitalize="words" placeholder="Seu nome" required>
-          <p class="field__err">Digite seu nome.</p>
-        </div>
-        <div class="field">
-          <label for="lead-email">E-mail</label>
-          <input id="lead-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="seu@email.com" required>
-          <p class="field__err">Digite um e-mail válido.</p>
-        </div>
-        <div class="field">
-          <label for="lead-whats">WhatsApp</label>
-          <div class="phone">
-            <select name="pais" aria-label="País (DDI)" autocomplete="tel-country-code">
-              <option value="BR" data-dial="55" selected>🇧🇷 +55</option>
-              <option value="PT" data-dial="351">🇵🇹 +351</option>
-              <option value="US" data-dial="1">🇺🇸 +1</option>
-              <option value="CA" data-dial="1">🇨🇦 +1</option>
-              <option value="AR" data-dial="54">🇦🇷 +54</option>
-              <option value="CL" data-dial="56">🇨🇱 +56</option>
-              <option value="CO" data-dial="57">🇨🇴 +57</option>
-              <option value="MX" data-dial="52">🇲🇽 +52</option>
-              <option value="PE" data-dial="51">🇵🇪 +51</option>
-              <option value="PY" data-dial="595">🇵🇾 +595</option>
-              <option value="UY" data-dial="598">🇺🇾 +598</option>
-              <option value="ES" data-dial="34">🇪🇸 +34</option>
-              <option value="IT" data-dial="39">🇮🇹 +39</option>
-              <option value="FR" data-dial="33">🇫🇷 +33</option>
-              <option value="DE" data-dial="49">🇩🇪 +49</option>
-              <option value="GB" data-dial="44">🇬🇧 +44</option>
-              <option value="IE" data-dial="353">🇮🇪 +353</option>
-              <option value="CH" data-dial="41">🇨🇭 +41</option>
-              <option value="AO" data-dial="244">🇦🇴 +244</option>
-              <option value="MZ" data-dial="258">🇲🇿 +258</option>
-              <option value="JP" data-dial="81">🇯🇵 +81</option>
-              <option value="AU" data-dial="61">🇦🇺 +61</option>
-            </select>
-            <input id="lead-whats" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(11) 99999-9999" maxlength="15" required>
-          </div>
-          <p class="field__err">Digite um WhatsApp válido, com código de área (DDD).</p>
-        </div>
-        <button class="btn btn--primary" type="submit">
-          Quero participar
-          <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </button>
-      </form>
+      <div class="lead__embed">
+        <iframe
+          src="https://api.leadconnectorhq.com/widget/form/e14RyIPL6H4OmLse69i6"
+          style="width:100%;height:100%;border:none;border-radius:3px"
+          id="inline-e14RyIPL6H4OmLse69i6"
+          data-layout="{'id':'INLINE'}"
+          data-trigger-type="alwaysShow"
+          data-trigger-value=""
+          data-activation-type="alwaysActivated"
+          data-activation-value=""
+          data-deactivation-type="neverDeactivate"
+          data-deactivation-value=""
+          data-form-name="Black Ensinio"
+          data-height="372"
+          data-layout-iframe-id="inline-e14RyIPL6H4OmLse69i6"
+          data-form-id="e14RyIPL6H4OmLse69i6"
+          title="Black Ensinio"
+          allowtransparency="true">
+        </iframe>
+      </div>
       <p class="lead__note">
         <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1 2.5 3.2v4.3c0 3.3 2.3 6.3 5.5 7.5 3.2-1.2 5.5-4.2 5.5-7.5V3.2L8 1Z"/></svg>
         Seus dados estão seguros. Nada de spam.
@@ -861,104 +806,17 @@
       els.forEach((el) => io.observe(el));
     })();
 
-    // Popup de captura: os botões de CTA abrem o formulário; após o envio, vai para a página de obrigado
+    // Popup de captura: os botões de CTA abrem o formulário do GHL (o redirecionamento pós-envio é configurado no próprio formulário)
     (function () {
       const dialog = document.getElementById('lead');
-      const form = document.getElementById('lead-form');
-      const nome = form.elements.nome;
-      const email = form.elements.email;
-      const whats = form.elements.whatsapp;
-      const submit = form.querySelector('[type="submit"]');
-      const THANKS_URL = 'obrigado/';
-
-      // TODO: ligar o envio (webhook, planilha ou CRM). Deve resolver quando o lead for gravado.
-      function enviarLead(dados) {
-        return Promise.resolve(dados);
-      }
-
       document.querySelectorAll('[data-cta]').forEach((a) => a.addEventListener('click', (e) => {
         e.preventDefault();
         dialog.showModal();
-        nome.focus();
       }));
       dialog.querySelector('[data-close]').addEventListener('click', () => dialog.close());
       dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
-
-      // Telefone: país (DDI) + máscara com DDD conforme o país
-      const pais = form.elements.pais;
-      const MASKS = { BR: '(00) 00000-0000', PT: '000 000 000', US: '(000) 000-0000', CA: '(000) 000-0000' };
-      const digits = () => whats.value.replace(/\D/g, '');
-      function applyMask() {
-        const m = MASKS[pais.value];
-        const d = digits().slice(0, m ? m.replace(/[^0]/g, '').length : 15);
-        if (!m) return (whats.value = d);
-        if (pais.value === 'BR' && d.length < 11) { // fixo/celular com 8 dígitos: (00) 0000-0000
-          let v = d;
-          if (d.length > 2) v = `(${d.slice(0, 2)}) ${d.slice(2)}`;
-          if (d.length > 6) v = `(${d.slice(0, 2)}) ${d.slice(2, d.length - 4)}-${d.slice(-4)}`;
-          return (whats.value = v);
-        }
-        let out = '', i = 0;
-        for (const ch of m) {
-          if (i >= d.length) break;
-          out += ch === '0' ? d[i++] : ch;
-        }
-        whats.value = out;
-      }
-      function syncPais() {
-        const m = MASKS[pais.value];
-        whats.placeholder = pais.value === 'BR' ? '(11) 99999-9999' : m ? m.replace(/0/g, '9') : 'Número com código de área';
-        whats.maxLength = m ? m.length : 15;
-        applyMask();
-      }
-      whats.addEventListener('input', applyMask);
-      pais.addEventListener('change', () => { syncPais(); whats.focus(); });
-      syncPais();
-
-      const okNome = () => nome.value.trim().length >= 2;
-      const okEmail = () => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim());
-      const okWhats = () => {
-        const d = digits(), m = MASKS[pais.value];
-        if (pais.value === 'BR') return /^[1-9]{2}9?\d{8}$/.test(d);
-        return m ? d.length === m.replace(/[^0]/g, '').length : d.length >= 6 && d.length <= 15;
-      };
-      const mark = (input, ok) => input.closest('.field').classList.toggle('is-bad', !ok);
-      nome.addEventListener('blur', () => nome.value && mark(nome, okNome()));
-      email.addEventListener('blur', () => email.value && mark(email, okEmail()));
-      whats.addEventListener('blur', () => whats.value && mark(whats, okWhats()));
-      nome.addEventListener('input', () => okNome() && mark(nome, true));
-      email.addEventListener('input', () => okEmail() && mark(email, true));
-      whats.addEventListener('input', () => okWhats() && mark(whats, true));
-
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const e0 = okNome(), e1 = okEmail(), e2 = okWhats();
-        mark(nome, e0); mark(email, e1); mark(whats, e2);
-        if (!e0) return nome.focus();
-        if (!e1) return email.focus();
-        if (!e2) return whats.focus();
-
-        const params = new URLSearchParams(location.search);
-        const dados = {
-          nome: nome.value.trim().replace(/\s+/g, ' '),
-          email: email.value.trim().toLowerCase(),
-          whatsapp: pais.selectedOptions[0].dataset.dial + digits(),
-          pais: pais.value,
-          pagina: 'black01',
-          utm_source: params.get('utm_source') || '',
-          utm_medium: params.get('utm_medium') || '',
-          utm_campaign: params.get('utm_campaign') || '',
-          utm_content: params.get('utm_content') || '',
-          utm_term: params.get('utm_term') || '',
-          enviado_em: new Date().toISOString()
-        };
-        submit.disabled = true;
-        submit.firstChild.textContent = 'Enviando… ';
-        enviarLead(dados)
-          .catch(() => {}) // segue para o obrigado mesmo se o envio falhar
-          .then(() => { location.href = THANKS_URL + location.search; });
-      });
     })();
   </script>
+  <script src="https://link.msgsndr.com/js/form_embed.js"></script>
 </body>
 </html>
